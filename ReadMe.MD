@@ -1,3 +1,6 @@
+This is a very rough draft.
+Basically pointers of what I have to say to anyone who wants to run .NET using CLI and on VS Code
+
 Here's how you can too.
 
 dotnet new webapi
