@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TrialBookStore.Data.Models;
+using TrialBookStoreWebApi.Modal;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace TrialBookStore.Data
 {
-    public class BookStoreContext : DbContext
+    public class BookStoreContext : IdentityDbContext<UserModal>
     {
         public BookStoreContext(DbContextOptions<BookStoreContext> options) : base(options)
         {

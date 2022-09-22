@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using TrialBookStore.BooksRepository;
-using TrialBookStore.Model;
+using TrialBookStore.Modal;
 
 namespace TrialBookStore.Controllers
 {
@@ -36,14 +36,14 @@ namespace TrialBookStore.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> AddNewBook([FromBody]BooksModel book)
+        public async Task<IActionResult> AddNewBook([FromBody]BooksModal book)
         {
             var id = await _bookRepository.AddBookAsync(book);
             return CreatedAtAction(nameof(GetBookById), new{id = id, controller = "Books"}, id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBookById([FromRoute] int id, [FromBody] BooksModel updatedBook)
+        public async Task<IActionResult> UpdateBookById([FromRoute] int id, [FromBody] BooksModal updatedBook)
         {
             try
             {
@@ -68,6 +68,13 @@ namespace TrialBookStore.Controllers
             {
                 return NotFound();
             }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBook([FromRoute] int id)
+        {
+            await _bookRepository.DeleteBookById(id);
+            return Ok(id);
         }
     }
 }

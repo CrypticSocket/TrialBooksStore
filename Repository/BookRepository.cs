@@ -2,51 +2,39 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 using TrialBookStore.Data;
 using TrialBookStore.Data.Models;
-using TrialBookStore.Model;
+using TrialBookStore.Modal;
 
 namespace TrialBookStore.BooksRepository
 {
     public class BookRepository : IBookRepository
     {
-        public BookStoreContext _context { get; }
+        private readonly BookStoreContext _context;
+        private readonly IMapper _mapper;
         
-        public BookRepository(BookStoreContext context)
+        public BookRepository(BookStoreContext context, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
-            
         }
 
-        public async Task<List<BooksModel>> GetAllBooksAsync()
+        public async Task<List<BooksModal>> GetAllBooksAsync()
         {
-            var records = await _context.Books.Select(x => new BooksModel()
-            {
-                id = x.id,
-                Title = x.Title,
-                Author = x.Author,
-                Description = x.Description
-            }).ToListAsync();
-
-            return records;
+            var records = await _context.Books.ToListAsync();
+            return _mapper.Map<List<BooksModal>>(records);
         }
         
-        public async Task<BooksModel> GetBookByIdAsync(int id)
+        public async Task<BooksModal> GetBookByIdAsync(int id)
         {
-            var records = await _context.Books.Where(x => x.id == id).Select(x => new BooksModel()
-            {
-                id = x.id,
-                Title = x.Title,
-                Author = x.Author,
-                Description = x.Description
-            }).FirstOrDefaultAsync();
-
-            return records;
+            var records = await _context.Books.FindAsync(id);
+            return _mapper.Map<BooksModal>(records);
         }
 
-        public async Task<int> AddBookAsync(BooksModel book)
+        public async Task<int> AddBookAsync(BooksModal book)
         {
             var newBook = new Books(){
                 Title = book.Title,
@@ -59,7 +47,7 @@ namespace TrialBookStore.BooksRepository
             return newBook.id;
         }
 
-        public async Task UpdateBookAsync(int id, BooksModel updatedBook)
+        public async Task UpdateBookAsync(int id, BooksModal updatedBook)
         {
             var book = new Books(){
                 id = id,
@@ -80,6 +68,13 @@ namespace TrialBookStore.BooksRepository
                 updatedBook.ApplyTo(book);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task DeleteBookById(int id)
+        {
+            var book = _context.Books.Find(id);
+            _context.Remove(book);
+            await _context.SaveChangesAsync();
         }
     }
 }
