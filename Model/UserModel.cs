@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace TrialBookStoreWebApi.Modal
+namespace TrialBookStoreWebApi.Model
 {
-    public class UserModal : IdentityUser
+    public class UserModel : IdentityUser
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -196,3 +196,4 @@
 /home/crypticsocket/Documents/Projects/Code/TrialBookStore/TrialBookStoreWebApi/obj/Debug/net6.0/TrialBookStore.pdb
 /home/crypticsocket/Documents/Projects/Code/TrialBookStore/TrialBookStoreWebApi/obj/Debug/net6.0/TrialBookStore.genruntimeconfig.cache
 /home/crypticsocket/Documents/Projects/Code/TrialBookStore/TrialBookStoreWebApi/obj/Debug/net6.0/ref/TrialBookStore.dll
+/home/crypticsocket/Documents/Projects/Code/TrialBookStore/TrialBookStoreWebApi/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll

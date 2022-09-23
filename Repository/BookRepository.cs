@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 using TrialBookStore.Data;
 using TrialBookStore.Data.Models;
-using TrialBookStore.Modal;
+using TrialBookStore.Model;
 
 namespace TrialBookStore.BooksRepository
 {
@@ -22,19 +22,19 @@ namespace TrialBookStore.BooksRepository
             _context = context;
         }
 
-        public async Task<List<BooksModal>> GetAllBooksAsync()
+        public async Task<List<BooksModel>> GetAllBooksAsync()
         {
             var records = await _context.Books.ToListAsync();
-            return _mapper.Map<List<BooksModal>>(records);
+            return _mapper.Map<List<BooksModel>>(records);
         }
         
-        public async Task<BooksModal> GetBookByIdAsync(int id)
+        public async Task<BooksModel> GetBookByIdAsync(int id)
         {
             var records = await _context.Books.FindAsync(id);
-            return _mapper.Map<BooksModal>(records);
+            return _mapper.Map<BooksModel>(records);
         }
 
-        public async Task<int> AddBookAsync(BooksModal book)
+        public async Task<int> AddBookAsync(BooksModel book)
         {
             var newBook = new Books(){
                 Title = book.Title,
@@ -47,7 +47,7 @@ namespace TrialBookStore.BooksRepository
             return newBook.id;
         }
 
-        public async Task UpdateBookAsync(int id, BooksModal updatedBook)
+        public async Task UpdateBookAsync(int id, BooksModel updatedBook)
         {
             var book = new Books(){
                 id = id,

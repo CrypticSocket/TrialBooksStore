@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TrialBookStore.Modal
+namespace TrialBookStore.Model
 {
-    public class BooksModal
+    public class BooksModel
     {
         public int id { get; set; }
         [Required]

@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TrialBookStoreWebApi.Modal
+namespace TrialBookStoreWebApi.Model
 {
-    public class SignUpModal
+    public class SignUpModel
     {
         [Required]
         public string FirstName { get; set; }

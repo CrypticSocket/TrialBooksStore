@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using TrialBookStore.Data.Models;
-using TrialBookStore.Modal;
+using TrialBookStore.Model;
 
 namespace TrialBookStore.Helpers
 {
@@ -12,7 +12,7 @@ namespace TrialBookStore.Helpers
     {
         public ApplicationMapper()
         {
-            CreateMap<Books, BooksModal>().ReverseMap();
+            CreateMap<Books, BooksModel>().ReverseMap();
         }
     }
 }
